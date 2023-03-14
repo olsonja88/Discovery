@@ -1,8 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8s02xe7r4yyl"]
+[gd_scene load_steps=4 format=3 uid="uid://b8s02xe7r4yyl"]
 
 [ext_resource type="Texture2D" uid="uid://c0ojpkd5ut77n" path="res://Discovery Sprites/MainCharacterMVP.png" id="1_e5blm"]
+[ext_resource type="Script" path="res://player.cs" id="1_stfbb"]
 
-[node name="Player" type="Area2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pnl72"]
+radius = 28.0
+height = 126.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(214, 661)
+script = ExtResource("1_stfbb")
+jumpForce = 1500
+gravity = 4000
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
 texture = ExtResource("1_e5blm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 1)
+shape = SubResource("CapsuleShape2D_pnl72")
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.25
+
+[connection signal="timeout" from="JumpTimer" to="." method="OnJumpTimerTimeout"]
