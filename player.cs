@@ -9,10 +9,10 @@ public partial class player : CharacterBody2D
     public int speed = 400;
     // Force of jump
     [Export]
-    public int jumpForce;
+    public int jumpForce = 1500;
     // "Gravity"
     [Export]
-    public int gravity;
+    public int gravity = 4000;
 
     // Motion for player, will later be changed into built-in Velocity
     private Vector2 motion;
@@ -22,7 +22,7 @@ public partial class player : CharacterBody2D
     private bool jumping;
 
     // When jump timer runs out
-    public void OnJumpTimerTimeout(double delta)
+    public void OnJumpTimerTimeout()
     {
         // jumping is false
         jumping = false;
@@ -31,11 +31,13 @@ public partial class player : CharacterBody2D
     // Handling movement and physics
     public override void _PhysicsProcess(double delta)
     {
-        // Setting ground motion to zero if not pressing button
+        // Setting ground motion to zero if not pressing button and grounded
         motion.X = 0;
+       
         // Rotation is always 0 degrees
         Rotation = 0;
 
+       
         // Taking input and changing ground motion accordingly
         if (Input.IsActionPressed("move_left"))
         {
@@ -49,6 +51,7 @@ public partial class player : CharacterBody2D
         }
         // Setting ground motion with X direction * Speed
         motion.X += motion.X * speed;
+        
 
         // Reset Y velocity and jumping is false when grounded
         if (IsOnFloor())
@@ -56,10 +59,10 @@ public partial class player : CharacterBody2D
             motion.Y = 0;
             jumping = false;
         }
-        // If not jumping
+        // If not jumping currently
         if (!jumping)
         {
-            // If jumping from the floor
+            // You can jump from the floor
             if (Input.IsActionPressed("jump") && IsOnFloor())
             {
                 // Jumping
@@ -69,7 +72,7 @@ public partial class player : CharacterBody2D
                 // Go up fast
                 motion.Y = (jumpForce * (float)delta) * -23;
             }
-            // Else not jumping
+            // Else you can't jump
             else
             {
                 // Gravity is applied
