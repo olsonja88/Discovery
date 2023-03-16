@@ -6,7 +6,7 @@ public partial class player : CharacterBody2D
     // Movement variables, can be set in the Inspector
     // Movement speed
     [Export]
-    public int speed = 400;
+    public int walkSpeed = 400;
     // Force of jump
     [Export]
     public int jumpForce = 1500;
@@ -50,7 +50,7 @@ public partial class player : CharacterBody2D
             motion.X += 1;
         }
         // Setting ground motion with X direction * Speed
-        motion.X += motion.X * speed;
+        motion.X += motion.X * walkSpeed;
         
 
         // Reset Y velocity and jumping is false when grounded
