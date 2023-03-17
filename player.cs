@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO.IsolatedStorage;
 
 public partial class player : CharacterBody2D
 {
@@ -20,14 +21,16 @@ public partial class player : CharacterBody2D
     private Vector2 motion;
     // Ceiling for motion.Y * JumpForce
     private int jumpCeil =  -1050;
-    // When jumpSwitch == false, jump key does nothing (on until peak acceleration)
-    private bool jumping;
+    // When isJumping == false, jump key does nothing (on until peak acceleration)
+    private bool isJumping;
+    private bool isWalking;
+    private bool isSprinting;
 
     // When jump timer runs out
     public void OnJumpTimerTimeout()
     {
         // jumping is false
-        jumping = false;
+        isJumping = false;
     }
 
     // Handling movement and physics
@@ -39,46 +42,64 @@ public partial class player : CharacterBody2D
         // Rotation is always 0 degrees
         Rotation = 0;
 
-        bool isWalkingLeft = Input.IsActionPressed("walk_left");
-        bool isSprintingLeft = Input.IsActionPressed("sprint_left");
-
-        bool isWalkingRight = Input.IsActionPressed("walk_right");
-        bool isSprintingRight = Input.IsActionPressed("sprint_left");
+        // Init movement bools to false
+        isWalking = false;
+        isSprinting = false;
 
         // Take input and change ground motion accordingly
-        if (isWalkingLeft | isSprintingLeft) // is moving left
+        if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
         {
-            // X negative direction
-            motion.X -= 1;
+            isWalking = true;
+            isSprinting = false;
         }
-        if (isWalkingRight | isSprintingRight) // is moving right
+        if (Input.IsActionPressed("sprint")) // If sprinting
         {
-            // X positive direction
-            motion.X += 1;
+            isSprinting = true;
+            isWalking = false;
         }
-        // Setting ground motion with X direction * Speed
-        if (isWalkingLeft | isWalkingRight) // is walking
+
+        // If walking
+        if (isWalking)
         {
-            motion.X += motion.X * walkSpeed;
-        } else if (isSprintingLeft | isSprintingRight) // is sprinting
-        {
-            motion.X = motion.X * sprintSpeed;
+            if (Input.IsActionPressed("walk_left"))
+            {
+                // Go walkSpeed
+                motion.X -= walkSpeed;
+            }
+            else if (Input.IsActionPressed("walk_right"))
+            {
+                motion.X += walkSpeed;
+            }
         }
+        // If sprinting
+        if (isSprinting)
+        {
+            if (Input.IsActionPressed("walk_left"))
+            {
+                // Go sprintSpeed
+                motion.X -= sprintSpeed;
+            }
+            else if (Input.IsActionPressed("walk_right"))
+            {
+                motion.X += sprintSpeed;
+            }
+        }
+
 
         // Reset Y velocity and jumping is false when grounded
         if (IsOnFloor())
         {
             motion.Y = 0;
-            jumping = false;
+            isJumping = false;
         }
         // If not jumping currently
-        if (!jumping)
+        if (!isJumping)
         {
             // You can jump from the floor
             if (Input.IsActionPressed("jump") && IsOnFloor())
             {
                 // Jumping
-                jumping = true;
+                isJumping = true;
                 // Start JumpTimer
                 GetNode<Timer>("JumpTimer").Start();
                 // Go up fast
@@ -92,7 +113,7 @@ public partial class player : CharacterBody2D
             }
         }
         // If jumping
-        if (jumping)
+        if (isJumping)
         {
             // If jump is pressed and motion.Y is above jumpCeil velocity
             if (Input.IsActionPressed("jump") && motion.Y > jumpCeil)
@@ -104,13 +125,13 @@ public partial class player : CharacterBody2D
             else if (Input.IsActionJustReleased("jump"))
             {
                 // Turn off jumping
-                jumping = false;
+                isJumping = false;
             }
             // Else jumping and below jumpCeil
             else
             {
                 // Turn off jumping
-                jumping = false;
+                isJumping = false;
                 // Gravity is applied
                 motion.Y += (gravity * (float)delta) * 2;
             }
