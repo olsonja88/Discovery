@@ -7,6 +7,8 @@ public partial class player : CharacterBody2D
     // Movement speed
     [Export]
     public int walkSpeed = 400;
+    [Export]
+    public int sprintSpeed = 800;
     // Force of jump
     [Export]
     public int jumpForce = 1500;
@@ -31,27 +33,37 @@ public partial class player : CharacterBody2D
     // Handling movement and physics
     public override void _PhysicsProcess(double delta)
     {
-        // Setting ground motion to zero if not pressing button and grounded
+        // Init ground motion to zero
         motion.X = 0;
        
         // Rotation is always 0 degrees
         Rotation = 0;
 
-       
-        // Taking input and changing ground motion accordingly
-        if (Input.IsActionPressed("move_left"))
+        bool isWalkingLeft = Input.IsActionPressed("walk_left");
+        bool isSprintingLeft = Input.IsActionPressed("sprint_left");
+
+        bool isWalkingRight = Input.IsActionPressed("walk_right");
+        bool isSprintingRight = Input.IsActionPressed("sprint_left");
+
+        // Take input and change ground motion accordingly
+        if (isWalkingLeft || isSprintingLeft) // is moving left
         {
             // X negative direction
             motion.X -= 1;
         }
-        if (Input.IsActionPressed("move_right"))
+        if (isWalkingRight || isSprintingRight) // is moving right
         {
             // X positive direction
             motion.X += 1;
         }
         // Setting ground motion with X direction * Speed
-        motion.X += motion.X * walkSpeed;
-        
+        if (isWalkingLeft || isWalkingRight) // is walking
+        {
+            motion.X += motion.X * walkSpeed;
+        } else if (isSprintingLeft || isSprintingRight) // is sprinting
+        {
+            motion.X = motion.X * sprintSpeed;
+        }
 
         // Reset Y velocity and jumping is false when grounded
         if (IsOnFloor())
