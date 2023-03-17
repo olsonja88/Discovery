@@ -46,21 +46,21 @@ public partial class player : CharacterBody2D
         bool isSprintingRight = Input.IsActionPressed("sprint_left");
 
         // Take input and change ground motion accordingly
-        if (isWalkingLeft || isSprintingLeft) // is moving left
+        if (isWalkingLeft | isSprintingLeft) // is moving left
         {
             // X negative direction
             motion.X -= 1;
         }
-        if (isWalkingRight || isSprintingRight) // is moving right
+        if (isWalkingRight | isSprintingRight) // is moving right
         {
             // X positive direction
             motion.X += 1;
         }
         // Setting ground motion with X direction * Speed
-        if (isWalkingLeft || isWalkingRight) // is walking
+        if (isWalkingLeft | isWalkingRight) // is walking
         {
             motion.X += motion.X * walkSpeed;
-        } else if (isSprintingLeft || isSprintingRight) // is sprinting
+        } else if (isSprintingLeft | isSprintingRight) // is sprinting
         {
             motion.X = motion.X * sprintSpeed;
         }
