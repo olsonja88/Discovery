@@ -19,12 +19,9 @@ public partial class player : CharacterBody2D
 
     // Motion for player, will later be changed into built-in Velocity
     private Vector2 motion;
-    // Ceiling for motion.Y * JumpForce
-    private int jumpCeil =  -1050;
+ 
     // When isJumping == false, jump key does nothing (on until peak acceleration)
     private bool isJumping;
-    private bool isWalking;
-    private bool isSprinting;
 
     // When jump timer runs out
     public void OnJumpTimerTimeout()
@@ -36,15 +33,18 @@ public partial class player : CharacterBody2D
     // Handling movement and physics
     public override void _PhysicsProcess(double delta)
     {
+        // Ceiling for motion.Y * JumpForce
+        int jumpCeil = -1050;
+
+        // Init movement bools to false
+        bool isWalking = false;
+        bool isSprinting = false;
+
         // Init ground motion to zero
         motion.X = 0;
        
         // Rotation is always 0 degrees
         Rotation = 0;
-
-        // Init movement bools to false
-        isWalking = false;
-        isSprinting = false;
 
         // Take input and change ground motion accordingly
         if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
