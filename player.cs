@@ -50,7 +50,6 @@ public partial class player : CharacterBody2D
         if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
         {
             isWalking = true;
-            isSprinting = false;
         }
         if (Input.IsActionPressed("sprint")) // If sprinting
         {
