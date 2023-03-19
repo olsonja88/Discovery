@@ -1,2 +1,0 @@
-# Discovery
-Game Dev Project
