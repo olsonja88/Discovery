@@ -19,7 +19,7 @@ public partial class player : CharacterBody2D
 
     // Motion for player, will later be changed into built-in Velocity
     private Vector2 motion;
- 
+
     // When isJumping == false, jump key does nothing (on until peak acceleration)
     private bool isJumping;
 
@@ -40,57 +40,58 @@ public partial class player : CharacterBody2D
         bool isWalking = false;
         bool isSprinting = false;
 
-        // Init ground motion to zero
-        motion.X = 0;
-       
         // Rotation is always 0 degrees
         Rotation = 0;
 
-        // Take input and change ground motion accordingly
-        if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
-        {
-            isWalking = true;
-        }
-        if (Input.IsActionPressed("sprint")) // If sprinting
-        {
-            isSprinting = true;
-            isWalking = false;
-        }
-
-        // If walking
-        if (isWalking)
-        {
-            if (Input.IsActionPressed("walk_left"))
-            {
-                // Go walkSpeed
-                motion.X -= walkSpeed;
-            }
-            else if (Input.IsActionPressed("walk_right"))
-            {
-                motion.X += walkSpeed;
-            }
-        }
-        // If sprinting
-        if (isSprinting)
-        {
-            if (Input.IsActionPressed("walk_left"))
-            {
-                // Go sprintSpeed
-                motion.X -= sprintSpeed;
-            }
-            else if (Input.IsActionPressed("walk_right"))
-            {
-                motion.X += sprintSpeed;
-            }
-        }
-
-
-        // Reset Y velocity and jumping is false when grounded
         if (IsOnFloor())
         {
+            // Init ground motion to zero
+            motion.X = 0;
+
+            // Reset Y velocity and jumping is false when grounded
             motion.Y = 0;
             isJumping = false;
+
+            // Take input and change ground motion accordingly
+            if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
+            {
+                isWalking = true;
+            }
+            if (Input.IsActionPressed("sprint")) // If sprinting
+            {
+                isSprinting = true;
+                isWalking = false;
+            }
+
+            // If walking
+            if (isWalking)
+            {
+                if (Input.IsActionPressed("walk_left"))
+                {
+                    // Go walkSpeed
+                    motion.X -= walkSpeed;
+                }
+                else if (Input.IsActionPressed("walk_right"))
+                {
+                    motion.X += walkSpeed;
+                }
+            }
+            // If sprinting
+            if (isSprinting)
+            {
+                if (Input.IsActionPressed("walk_left"))
+                {
+                    // Go sprintSpeed
+                    motion.X -= sprintSpeed;
+                }
+                else if (Input.IsActionPressed("walk_right"))
+                {
+                    motion.X += sprintSpeed;
+                }
+            }
         }
+
+ 
         // If not jumping currently
         if (!isJumping)
         {
