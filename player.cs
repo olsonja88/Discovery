@@ -20,14 +20,21 @@ public partial class player : CharacterBody2D
     // Motion for player, will later be changed into built-in Velocity
     private Vector2 motion;
 
-    // When isJumping == false, jump key does nothing (on until peak acceleration)
+    // When isJumping is false, you aren't jumping
     private bool isJumping;
+    // When jumpCD is true, you can't jump
+    private bool jumpCD;
 
     // When jump timer runs out
     public void OnJumpTimerTimeout()
     {
-        // jumping is false
         isJumping = false;
+    }
+
+    public void OnJumpCooldownTimerTimeout()
+    {
+        // Turning off jumpCD, jumping is allowed again
+        jumpCD = false;
     }
 
     // Handling movement and physics
@@ -92,7 +99,7 @@ public partial class player : CharacterBody2D
                     motion.X += sprintSpeed;
                 }
             }
-        }
+        } // End if (IsOnFloor())
 
         // When not grounded
         if (!IsOnFloor())
@@ -114,7 +121,6 @@ public partial class player : CharacterBody2D
                     {
                         // Move left at half speed
                         motion.X = -1 * (motion.X / 2);
-                        GD.Print("airWalking left");
                     }
                 }
                 // If moving left
@@ -124,7 +130,6 @@ public partial class player : CharacterBody2D
                     {
                         // Move right at half speed
                         motion.X = -1 * (motion.X / 2);
-                        GD.Print("airWalking right");
                     }
                 }
             } // End if (airWalking)
@@ -134,8 +139,8 @@ public partial class player : CharacterBody2D
         // If not jumping currently
         if (!isJumping)
         {
-            // You can jump from the floor
-            if (Input.IsActionPressed("jump") && IsOnFloor())
+            // You can jump from the floor, if not on CD
+            if (Input.IsActionPressed("jump") && IsOnFloor() && !jumpCD)
             {
                 // Jumping
                 isJumping = true;
@@ -166,6 +171,10 @@ public partial class player : CharacterBody2D
             {
                 // Turn off jumping
                 isJumping = false;
+                // Start jump cooldown timer
+                GetNode<Timer>("JumpCooldown").Start();
+                // jumpCD on
+                jumpCD = true;
             }
             // Else jumping and below jumpCeil
             else
@@ -181,6 +190,7 @@ public partial class player : CharacterBody2D
         Velocity = motion;
         // Moving the player (using built-in Velocity)
         MoveAndSlide();
-    }
 
-}
+    } // End _PhysicsProcess()
+
+} // End player : CharacterBody2D
