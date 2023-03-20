@@ -21,6 +21,5 @@ position = Vector2(-3, 1)
 shape = SubResource("CapsuleShape2D_pnl72")
 
 [node name="JumpTimer" type="Timer" parent="."]
-wait_time = 0.3
 
 [connection signal="timeout" from="JumpTimer" to="." method="OnJumpTimerTimeout"]
