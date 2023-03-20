@@ -22,7 +22,4 @@ shape = SubResource("CapsuleShape2D_pnl72")
 
 [node name="JumpTimer" type="Timer" parent="."]
 
-[node name="JumpCooldown" type="Timer" parent="."]
-
 [connection signal="timeout" from="JumpTimer" to="." method="OnJumpTimerTimeout"]
-[connection signal="timeout" from="JumpCooldown" to="." method="OnJumpCooldownTimerTimeout"]

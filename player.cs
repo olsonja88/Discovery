@@ -31,14 +31,21 @@ public partial class player : CharacterBody2D
         isJumping = false;
     }
 
-    public void OnJumpCooldownTimerTimeout()
+    //public void OnJumpCooldownTimerTimeout()
+    //{
+    //    // Turning off jumpCD, jumping is allowed again
+    //    jumpCD = false;
+    //    GD.Print("JumpCD off");
+    //    // Stop Timer so not looping
+    //    GetNode<Timer>("JumpCooldown").Stop();
+    //}
+
+
+    public override void _Ready()
     {
-        // Turning off jumpCD, jumping is allowed again
         jumpCD = false;
-        GD.Print("JumpCD off");
-        // Stop Timer so not looping
-        GetNode<Timer>("JumpCooldown").Stop();
     }
+
 
     // Handling movement and physics
     public override void _PhysicsProcess(double delta)
@@ -142,11 +149,17 @@ public partial class player : CharacterBody2D
         // If not jumping currently
         if (!isJumping)
         {
+            // Releasing space button allows jumping again
+            if (Input.IsActionJustReleased("jump"))
+            {
+                jumpCD = false;
+            }
             // You can jump from the floor, if not on CD
-            if (Input.IsActionPressed("jump") && IsOnFloor() && !jumpCD)
+            else if (Input.IsActionPressed("jump") && IsOnFloor() && !jumpCD)
             {
                 // Jumping
                 isJumping = true;
+                jumpCD = true;
                 // Start JumpTimer
                 GetNode<Timer>("JumpTimer").Start();
                 // Go up fast
@@ -175,10 +188,10 @@ public partial class player : CharacterBody2D
                 // Turn off jumping
                 isJumping = false;
                 // Start jump cooldown timer
-                GetNode<Timer>("JumpCooldown").Start();
+                //GetNode<Timer>("JumpCooldown").Start();
                 // jumpCD on
-                jumpCD = true;
-                GD.Print("jumpCD started");
+                jumpCD = false;
+                //GD.Print("jumpCD started");
             }
             // Else jumping and below jumpCeil
             else
