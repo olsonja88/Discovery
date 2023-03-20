@@ -78,6 +78,7 @@ public partial class player : CharacterBody2D
                     motion.X += walkSpeed;
                 }
             }
+
             // If sprinting
             if (isSprinting)
             {
@@ -92,6 +93,42 @@ public partial class player : CharacterBody2D
                 }
             }
         }
+
+        // When not grounded
+        if (!IsOnFloor())
+        {
+            // Checking if player is trying to move in air
+            if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right"))
+            {
+                // Turn on airWalking
+                airWalking = true;
+            }
+
+            if (airWalking)
+            {
+                // If moving right
+                if (motion.X > 0)
+                {
+                    // And the player hits "walk left"
+                    if (Input.IsActionPressed("walk_left"))
+                    {
+                        // Move left at half speed
+                        motion.X = -1 * (motion.X / 2);
+                        GD.Print("airWalking left");
+                    }
+                }
+                // If moving left
+                else if (motion.X < 0)
+                {   // And the player hits "walk right"
+                    if (Input.IsActionPressed("walk_right"))
+                    {
+                        // Move right at half speed
+                        motion.X = -1 * (motion.X / 2);
+                        GD.Print("airWalking right");
+                    }
+                }
+            } // End if (airWalking)
+        } // End if (!IsOnFloor())
 
  
         // If not jumping currently
@@ -138,38 +175,6 @@ public partial class player : CharacterBody2D
                 // Gravity is applied
                 motion.Y += (gravity * (float)delta) * 2;
             }
-
-            // Checking if player is trying to move in air
-            if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right"))
-            {
-                // Turn on airWalking
-                airWalking = true;
-            }
-
-            if (airWalking)
-            {
-                // If moving right
-                if (motion.X > 0)
-                {
-                    // And the player hits "walk left"
-                    if (Input.IsActionPressed("walk_left"))
-                    {
-                        // Move left at half speed
-                        motion.X = -1 * (motion.X / 2);
-                        GD.Print("airWalking left");
-                    }
-                }
-                // If moving left
-                else if (motion.X < 0)
-                {   // And the player hits "walk right"
-                    if (Input.IsActionPressed("walk_right"))
-                    {
-                        // Move right at half speed
-                        motion.X = -1 * (motion.X / 2);
-                        GD.Print("airWalking right");
-                    }
-                }
-            } // End if (airWalking)
         }// End if (isJumping)
 
         // Setting built-in Velocity to motion
