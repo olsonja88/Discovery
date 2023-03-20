@@ -35,6 +35,9 @@ public partial class player : CharacterBody2D
     {
         // Turning off jumpCD, jumping is allowed again
         jumpCD = false;
+        GD.Print("JumpCD off");
+        // Stop Timer so not looping
+        GetNode<Timer>("JumpCooldown").Stop();
     }
 
     // Handling movement and physics
@@ -175,6 +178,7 @@ public partial class player : CharacterBody2D
                 GetNode<Timer>("JumpCooldown").Start();
                 // jumpCD on
                 jumpCD = true;
+                GD.Print("jumpCD started");
             }
             // Else jumping and below jumpCeil
             else
