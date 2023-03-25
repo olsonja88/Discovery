@@ -44,98 +44,16 @@ public partial class player : CharacterBody2D
         // Ceiling for motion.Y * JumpForce
         int jumpCeil = -1050;
 
-        // Init movement bools to false
-        bool isWalking = false;
-        bool isSprinting = false;
-        bool airWalking = false;
-
         // Rotation is always 0 degrees
         Rotation = 0;
 
-        // When grounded
         if (IsOnFloor())
         {
-            // Init ground motion to zero
-            motion.X = 0;
-
-            // Reset Y velocity and jumping is false when grounded
-            motion.Y = 0;
-            isJumping = false;
-
-            // Take input and change ground motion accordingly
-            if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
-            {
-                isWalking = true;
-            }
-            if (Input.IsActionPressed("sprint")) // If sprinting
-            {
-                isSprinting = true;
-                isWalking = false;
-            }
-
-            // If walking
-            if (isWalking)
-            {
-                if (Input.IsActionPressed("walk_left"))
-                {
-                    // Go walkSpeed
-                    motion.X -= walkSpeed;
-                }
-                else if (Input.IsActionPressed("walk_right"))
-                {
-                    motion.X += walkSpeed;
-                }
-            }
-
-            // If sprinting
-            if (isSprinting)
-            {
-                if (Input.IsActionPressed("walk_left"))
-                {
-                    // Go sprintSpeed
-                    motion.X -= sprintSpeed;
-                }
-                else if (Input.IsActionPressed("walk_right"))
-                {
-                    motion.X += sprintSpeed;
-                }
-            }
-        } // End if (IsOnFloor())
-
-        // When not grounded
-        if (!IsOnFloor())
+            HandleHorizontalGroundMovement();
+        } else if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right"))
         {
-            // Checking if player is trying to move in air
-            if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right"))
-            {
-                // Turn on airWalking
-                airWalking = true;
-            }
-
-            if (airWalking)
-            {
-                // If moving right
-                if (motion.X > 0)
-                {
-                    // And the player hits "walk left"
-                    if (Input.IsActionPressed("walk_left"))
-                    {
-                        // Move left at half speed
-                        motion.X = -1 * (motion.X / 2);
-                    }
-                }
-                // If moving left
-                else if (motion.X < 0)
-                {   // And the player hits "walk right"
-                    if (Input.IsActionPressed("walk_right"))
-                    {
-                        // Move right at half speed
-                        motion.X = -1 * (motion.X / 2);
-                    }
-                }
-            } // End if (airWalking)
-        } // End if (!IsOnFloor())
-
+            HandleHorizontalAirMovement();
+        }
  
         // If not jumping currently
         if (!isJumping)
@@ -144,9 +62,7 @@ public partial class player : CharacterBody2D
             if (Input.IsActionJustReleased("jump"))
             {
                 jumpCD = false;
-            }
-            // You can jump from the floor, if not on CD
-            else if (Input.IsActionPressed("jump") && IsOnFloor() && !jumpCD)
+            } else if (Input.IsActionPressed("jump") && IsOnFloor() && !jumpCD)
             {
                 // Jumping
                 isJumping = true;
@@ -198,4 +114,64 @@ public partial class player : CharacterBody2D
 
     } // End _PhysicsProcess()
 
-} // End player : CharacterBody2D
+    private void HandleHorizontalGroundMovement()
+    {
+        bool isWalking = false;
+        bool isSprinting = false;
+
+        // Init motion to zero
+        motion = Vector2.Zero;
+
+        // Take input and change ground motion accordingly
+        if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
+        {
+            isWalking = true;
+        }
+        if (Input.IsActionPressed("sprint")) // If sprinting
+        {
+            isSprinting = true;
+            isWalking = false;
+        }
+        
+        if (Input.IsActionPressed("walk_left"))
+        {
+            motion.X -= 1;
+        }
+        else if (Input.IsActionPressed("walk_right"))
+        {
+            motion.X += 1;
+        }
+        
+        if (isWalking)
+        {
+            motion.X = motion.X * walkSpeed;
+        }
+        else if (isSprinting) {
+            motion.X = motion.X * sprintSpeed;
+        }
+    }
+
+    private void HandleHorizontalAirMovement()
+    {
+        // If moving right
+        if (motion.X > 0)
+        {
+            // And the player hits "walk left"
+            if (Input.IsActionPressed("walk_left"))
+            {
+                // Move left at half speed
+                motion.X = -1 * (motion.X / 2);
+            }
+        }
+        // If moving left
+        else if (motion.X < 0)
+        {   // And the player hits "walk right"
+            if (Input.IsActionPressed("walk_right"))
+            {
+                // Move right at half speed
+                motion.X = -1 * (motion.X / 2);
+            }
+        }
+    }
+
+}
