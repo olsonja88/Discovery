@@ -109,6 +109,10 @@ public partial class player : CharacterBody2D
 
         // Setting built-in Velocity to motion
         Velocity = motion;
+
+        // Animate Sprite
+        HandleAnimations();
+
         // Moving the player (using built-in Velocity)
         MoveAndSlide();
 
@@ -172,6 +176,12 @@ public partial class player : CharacterBody2D
                 motion.X = -1 * (motion.X / 2);
             }
         }
+    }
+
+    private void HandleAnimations()
+    {
+        var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        animatedSprite2D.Play();
     }
 
 }
