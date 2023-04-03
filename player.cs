@@ -180,6 +180,9 @@ public partial class player : CharacterBody2D
 
     private void HandleAnimations()
     {
+        // int for left or right direction
+        int direction = 0;
+
         var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         animatedSprite2D.Play();
         animatedSprite2D.FlipH = motion.X < 0;
