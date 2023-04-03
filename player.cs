@@ -24,6 +24,8 @@ public partial class player : CharacterBody2D
     private bool isJumping;
     // When jumpCD is true, you can't jump
     private bool jumpCD;
+    // bool for facing left
+    private bool faceLeft;
 
     // When jump timer runs out
     public void OnJumpTimerTimeout()
@@ -35,6 +37,7 @@ public partial class player : CharacterBody2D
     public override void _Ready()
     {
         jumpCD = false;
+        faceLeft = false;
     }
 
 
@@ -180,18 +183,28 @@ public partial class player : CharacterBody2D
 
     private void HandleAnimations()
     {
-        // int for left or right direction
-        int direction = 0;
-
         var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         animatedSprite2D.Play();
-        animatedSprite2D.FlipH = motion.X < 0;
 
-        if (motion.X == sprintSpeed || motion.X == -1 * sprintSpeed)
+        // Checking which direction player is facing
+        if (Input.IsKeyPressed(Key.A))
+        {
+            faceLeft = true;
+        }
+        else if (Input.IsKeyPressed(Key.D))
+        {
+            faceLeft = false;
+        }
+
+        // Flipping animations if facing left
+        animatedSprite2D.FlipH = faceLeft;
+
+        // Check which animation to play
+        if (Input.IsActionPressed("sprint") && motion.X != 0)
         {
             animatedSprite2D.Animation = "sprint";
         }
-        else if (motion.X == 0)
+        else
         {
             animatedSprite2D.Animation = "idle";
         }
