@@ -184,7 +184,7 @@ public partial class player : CharacterBody2D
         animatedSprite2D.Play();
         animatedSprite2D.FlipH = motion.X < 0;
 
-        if (motion.X == sprintSpeed)
+        if (motion.X == sprintSpeed || motion.X == -1 * sprintSpeed)
         {
             animatedSprite2D.Animation = "sprint";
         }
