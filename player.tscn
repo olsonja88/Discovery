@@ -51,7 +51,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"sprint",
-"speed": 2.0
+"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pnl72"]
