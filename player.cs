@@ -182,6 +182,16 @@ public partial class player : CharacterBody2D
     {
         var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         animatedSprite2D.Play();
+        animatedSprite2D.FlipH = motion.X < 0;
+
+        if (motion.X == sprintSpeed)
+        {
+            animatedSprite2D.Animation = "sprint";
+        }
+        else if (motion.X == 0)
+        {
+            animatedSprite2D.Animation = "idle";
+        }
     }
 
 }
