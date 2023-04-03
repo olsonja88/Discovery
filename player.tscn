@@ -1,9 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8s02xe7r4yyl"]
+[gd_scene load_steps=13 format=3 uid="uid://b8s02xe7r4yyl"]
 
 [ext_resource type="Script" path="res://player.cs" id="1_stfbb"]
 [ext_resource type="Texture2D" uid="uid://casee4cn63ui8" path="res://Discovery Sprites/MCIdle1.png" id="2_630l0"]
 [ext_resource type="Texture2D" uid="uid://183wsabnsm3p" path="res://Discovery Sprites/MCIdle2and4.png" id="3_mjy6u"]
 [ext_resource type="Texture2D" uid="uid://cx3lhsf4mssvy" path="res://Discovery Sprites/MCIdle3.png" id="4_t326m"]
+[ext_resource type="Texture2D" uid="uid://de0adk0b0kbff" path="res://Discovery Sprites/MCSprint1.png" id="5_ijqev"]
+[ext_resource type="Texture2D" uid="uid://decg2ddny26lo" path="res://Discovery Sprites/MCSprint2.png" id="6_tiyi8"]
+[ext_resource type="Texture2D" uid="uid://bf1q5532ikgc4" path="res://Discovery Sprites/MCSprint3.png" id="7_4rpa5"]
+[ext_resource type="Texture2D" uid="uid://w0c05qaw485e" path="res://Discovery Sprites/MCSprint4.png" id="8_venhi"]
+[ext_resource type="Texture2D" uid="uid://k1gunc8d8eh1" path="res://Discovery Sprites/MCSprint5.png" id="9_qcu0g"]
+[ext_resource type="Texture2D" uid="uid://nkfdecovwm8i" path="res://Discovery Sprites/MCSprint6.png" id="10_uwne8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_352re"]
 animations = [{
@@ -23,6 +29,29 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ijqev")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_tiyi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4rpa5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_venhi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_qcu0g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_uwne8")
+}],
+"loop": true,
+"name": &"sprint",
+"speed": 2.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pnl72"]
@@ -37,9 +66,7 @@ script = ExtResource("1_stfbb")
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_352re")
-animation = &"idle"
-frame = 1
-frame_progress = 0.0183029
+animation = &"sprint"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3, 1)
