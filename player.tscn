@@ -53,7 +53,22 @@ animations = [{
 "name": &"sprint",
 "speed": 8.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_tiyi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4rpa5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_venhi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_qcu0g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_uwne8")
+}],
 "loop": true,
 "name": &"walk",
 "speed": 6.0
@@ -66,13 +81,13 @@ height = 126.0
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(214, 661)
 script = ExtResource("1_stfbb")
+sprintSpeed = 700
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_352re")
 animation = &"walk"
-frame_progress = 0.441365
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3, 1)
