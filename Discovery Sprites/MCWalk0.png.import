@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br03ltr2yapgx"
-path="res://.godot/imported/MCWalk3.png-f5e6bf2c09cffb8a088679f8784b8195.ctex"
+uid="uid://cfuhjcr6xjxix"
+path="res://.godot/imported/MCWalk0.png-95272071f82de2c8b2bef96dd87d2ee5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Discovery Sprites/MCWalk3.png"
-dest_files=["res://.godot/imported/MCWalk3.png-f5e6bf2c09cffb8a088679f8784b8195.ctex"]
+source_file="res://Discovery Sprites/MCWalk0.png"
+dest_files=["res://.godot/imported/MCWalk0.png-95272071f82de2c8b2bef96dd87d2ee5.ctex"]
 
 [params]
 

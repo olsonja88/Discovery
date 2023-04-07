@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b8s02xe7r4yyl"]
+[gd_scene load_steps=13 format=3 uid="uid://b8s02xe7r4yyl"]
 
 [ext_resource type="Script" path="res://player.cs" id="1_stfbb"]
 [ext_resource type="Texture2D" uid="uid://casee4cn63ui8" path="res://Discovery Sprites/MCIdle1.png" id="2_630l0"]
@@ -10,9 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://w0c05qaw485e" path="res://Discovery Sprites/MCSprint4.png" id="8_venhi"]
 [ext_resource type="Texture2D" uid="uid://k1gunc8d8eh1" path="res://Discovery Sprites/MCSprint5.png" id="9_qcu0g"]
 [ext_resource type="Texture2D" uid="uid://nkfdecovwm8i" path="res://Discovery Sprites/MCSprint6.png" id="10_uwne8"]
-[ext_resource type="Texture2D" uid="uid://cuni3qpg0p4er" path="res://Discovery Sprites/MCWalk1.png" id="11_sesli"]
-[ext_resource type="Texture2D" uid="uid://cjbmhihelve13" path="res://Discovery Sprites/MCWalk2.png" id="12_vval3"]
-[ext_resource type="Texture2D" uid="uid://b8c060r43eafv" path="res://Discovery Sprites/MCWalk3.png" id="13_8c0xt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_352re"]
 animations = [{
@@ -55,20 +52,6 @@ animations = [{
 "loop": true,
 "name": &"sprint",
 "speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("11_sesli")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_vval3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_8c0xt")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pnl72"]
@@ -83,9 +66,7 @@ script = ExtResource("1_stfbb")
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_352re")
-animation = &"walk"
-frame = 1
-frame_progress = 0.478504
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3, 1)
