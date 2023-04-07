@@ -204,6 +204,10 @@ public partial class player : CharacterBody2D
         {
             animatedSprite2D.Animation = "sprint";
         }
+        else if (Input.IsActionPressed("walk_left") || (Input.IsActionPressed("walk_right")))
+        {
+            animatedSprite2D.Animation = "walk";
+        }
         else
         {
             animatedSprite2D.Animation = "idle";
