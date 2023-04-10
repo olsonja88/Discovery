@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8s02xe7r4yyl"]
+[gd_scene load_steps=15 format=3 uid="uid://b8s02xe7r4yyl"]
 
 [ext_resource type="Script" path="res://player.cs" id="1_stfbb"]
 [ext_resource type="Texture2D" uid="uid://casee4cn63ui8" path="res://Discovery Sprites/MCIdle1.png" id="2_630l0"]
+[ext_resource type="Texture2D" uid="uid://csugt31o1flob" path="res://Discovery Sprites/MCFall0.png" id="2_op7py"]
 [ext_resource type="Texture2D" uid="uid://183wsabnsm3p" path="res://Discovery Sprites/MCIdle2and4.png" id="3_mjy6u"]
 [ext_resource type="Texture2D" uid="uid://cx3lhsf4mssvy" path="res://Discovery Sprites/MCIdle3.png" id="4_t326m"]
 [ext_resource type="Texture2D" uid="uid://c1yvgxv6lkh8" path="res://Discovery Sprites/MCJump1.png" id="5_hvgnl"]
@@ -14,6 +15,14 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_352re"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_op7py")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_630l0")
@@ -96,7 +105,7 @@ sprintSpeed = 700
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_352re")
-animation = &"jump"
+animation = &"fall"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3, 1)
