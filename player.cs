@@ -24,6 +24,8 @@ public partial class player : CharacterBody2D
     private bool isJumping;
     // When jumpCD is true, you can't jump
     private bool jumpCD;
+    // bool for facing left
+    private bool faceLeft;
 
     // When jump timer runs out
     public void OnJumpTimerTimeout()
@@ -35,6 +37,7 @@ public partial class player : CharacterBody2D
     public override void _Ready()
     {
         jumpCD = false;
+        faceLeft = false;
     }
 
 
@@ -180,8 +183,52 @@ public partial class player : CharacterBody2D
 
     private void HandleAnimations()
     {
+        // Getting the AnimatedSprite2D
         var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        // Playing the animatedSprite2D
         animatedSprite2D.Play();
+        // Resetting the speedScale
+        animatedSprite2D.SpeedScale = 1;
+
+        // Checking which direction player is facing
+        if (Input.IsKeyPressed(Key.A))
+        {
+            faceLeft = true;
+        }
+        else if (Input.IsKeyPressed(Key.D))
+        {
+            faceLeft = false;
+        }
+
+        // Flipping animations if facing left
+        animatedSprite2D.FlipH = faceLeft;
+
+        // Check which animation to play
+        if (!IsOnFloor() && motion.Y < 0)
+        {
+            animatedSprite2D.Animation = "jump";
+        }
+        else if(!IsOnFloor() && motion.Y > 0)
+        {
+            animatedSprite2D.Animation = "fall";
+        }
+        else if (Input.IsActionPressed("sprint") && motion.X != 0)
+        {
+            // Playing sprint animation
+            animatedSprite2D.Animation = "sprint";
+        }
+        else if (Input.IsActionPressed("walk_left") || (Input.IsActionPressed("walk_right")))
+        {
+            // Slowing the animation speed
+            animatedSprite2D.SpeedScale = 0.8F;
+            // Playing sprint animation
+            animatedSprite2D.Animation = "sprint";
+        }
+        else
+        {
+            // Playing idle animation
+            animatedSprite2D.Animation = "idle";
+        }
     }
 
 }
