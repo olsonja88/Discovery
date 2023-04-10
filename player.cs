@@ -9,7 +9,7 @@ public partial class player : CharacterBody2D
     [Export]
     public int walkSpeed = 400;
     [Export]
-    public int sprintSpeed = 800;
+    public int sprintSpeed = 700;
     // Force of jump
     [Export]
     public int jumpForce = 1500;
@@ -160,14 +160,64 @@ public partial class player : CharacterBody2D
 
     private void HandleHorizontalAirMovement()
     {
+        // Horizontal speed in air
+        int airWalkSpeed = 200;
+
+        // If not moving
+        if (motion.X == 0)
+        {
+            // And the player hits "walk left"
+            if (Input.IsActionPressed("walk_left"))
+            {
+                motion.X = 0;
+                // Move left at half speed
+                motion.X -= airWalkSpeed;
+            }
+            else if (Input.IsActionPressed("sprint"))
+            {
+                if (Input.IsKeyPressed(Key.A))
+                {
+                    motion.X = 0;
+                    // Move left at half speed
+                    motion.X -= airWalkSpeed;
+                }
+            }
+
+            if (Input.IsActionPressed("walk_right"))
+            {
+                motion.X = 0;
+                // Move right at half speed
+                motion.X += airWalkSpeed;
+            }
+            else if (Input.IsActionPressed("sprint"))
+            {
+                if (Input.IsKeyPressed(Key.D))
+                {
+                    motion.X = 0;
+                    // Move left at half speed
+                    motion.X += airWalkSpeed;
+                }
+            }
+        }
+
         // If moving right
         if (motion.X > 0)
         {
             // And the player hits "walk left"
             if (Input.IsActionPressed("walk_left"))
             {
+                motion.X = 0;
                 // Move left at half speed
-                motion.X = -1 * (motion.X / 2);
+                motion.X -= airWalkSpeed;
+            }
+            else if (Input.IsActionPressed("sprint"))
+            {
+                if (Input.IsKeyPressed(Key.A))
+                {
+                    motion.X = 0;
+                    // Move left at half speed
+                    motion.X -= airWalkSpeed;
+                }
             }
         }
         // If moving left
@@ -175,8 +225,18 @@ public partial class player : CharacterBody2D
         {   // And the player hits "walk right"
             if (Input.IsActionPressed("walk_right"))
             {
+                motion.X = 0;
                 // Move right at half speed
-                motion.X = -1 * (motion.X / 2);
+                motion.X += airWalkSpeed;
+            }
+            else if (Input.IsActionPressed("sprint"))
+            {
+                if (Input.IsKeyPressed(Key.D))
+                {
+                    motion.X = 0;
+                    // Move left at half speed
+                    motion.X += airWalkSpeed;
+                }
             }
         }
     }
