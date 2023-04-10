@@ -179,7 +179,7 @@ public partial class player : CharacterBody2D
                 {
                     motion.X = 0;
                     // Move left at half speed
-                    motion.X -= airWalkSpeed * 2;
+                    motion.X -= airWalkSpeed;
                 }
             }
 
@@ -195,7 +195,7 @@ public partial class player : CharacterBody2D
                 {
                     motion.X = 0;
                     // Move left at half speed
-                    motion.X += airWalkSpeed * 2;
+                    motion.X += airWalkSpeed;
                 }
             }
         }
@@ -216,7 +216,7 @@ public partial class player : CharacterBody2D
                 {
                     motion.X = 0;
                     // Move left at half speed
-                    motion.X -= airWalkSpeed * 2;
+                    motion.X -= airWalkSpeed;
                 }
             }
         }
@@ -235,7 +235,7 @@ public partial class player : CharacterBody2D
                 {
                     motion.X = 0;
                     // Move left at half speed
-                    motion.X += airWalkSpeed * 2;
+                    motion.X += airWalkSpeed;
                 }
             }
         }
