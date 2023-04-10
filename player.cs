@@ -208,6 +208,10 @@ public partial class player : CharacterBody2D
         {
             animatedSprite2D.Animation = "jump";
         }
+        else if(!IsOnFloor() && motion.Y > 0)
+        {
+            animatedSprite2D.Animation = "fall";
+        }
         else if (Input.IsActionPressed("sprint") && motion.X != 0)
         {
             // Playing sprint animation
