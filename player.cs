@@ -204,7 +204,11 @@ public partial class player : CharacterBody2D
         animatedSprite2D.FlipH = faceLeft;
 
         // Check which animation to play
-        if (Input.IsActionPressed("sprint") && motion.X != 0)
+        if (!IsOnFloor() && motion.Y < 0)
+        {
+            animatedSprite2D.Animation = "jump";
+        }
+        else if (Input.IsActionPressed("sprint") && motion.X != 0)
         {
             // Playing sprint animation
             animatedSprite2D.Animation = "sprint";
