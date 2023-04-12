@@ -19,6 +19,11 @@ public partial class logic : Node2D
         
     }
 
+    private void CheckPlayerPos()
+    {
+        var playerPos = GetNode<Node2D>("Player").Position.Y;
+    }
+
     private void HandleDeath()
     {
 
