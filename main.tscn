@@ -88,7 +88,6 @@ sources/0 = SubResource("TileSetAtlasSource_p8o5a")
 [node name="Main" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("2_o8yrl")]
-gravity = 3000
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 

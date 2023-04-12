@@ -22,7 +22,6 @@ public partial class player : CharacterBody2D
 
     // Motion for player, will later be changed into built-in Velocity
     private Vector2 motion;
-
     // When isJumping is false, you aren't jumping
     private bool isJumping;
     // When jumpCD is true, you can't jump
