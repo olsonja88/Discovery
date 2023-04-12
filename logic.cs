@@ -8,4 +8,14 @@ public partial class logic : Node
         // Get player node on start-up
         var playerInit = GetNode<CharacterBody2D>("Player");
     }
+
+    public override void _Process()
+    {
+
+    }
+
+    private void HandleDeath()
+    {
+
+    }
 }
