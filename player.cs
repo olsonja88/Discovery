@@ -16,6 +16,9 @@ public partial class player : CharacterBody2D
     // "Gravity"
     [Export]
     public int gravity = 4000;
+    // Number of lives
+    [Export]
+    public int lives = 0;
 
     // Motion for player, will later be changed into built-in Velocity
     private Vector2 motion;
