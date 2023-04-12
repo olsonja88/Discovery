@@ -42,8 +42,5 @@ public partial class logic : Node2D
 
     private void HandleDeath()
     {
-        // Getting current number of lives player object
-        var playerCurrLives = GetNode<CharacterBody2D>("Player");
-        // Subtracting one from the number of lives
     }
 }
