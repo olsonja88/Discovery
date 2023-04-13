@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://iy6whrh0uuto"]
+[gd_scene load_steps=6 format=3 uid="uid://iy6whrh0uuto"]
 
 [ext_resource type="Script" path="res://logic.cs" id="1_4jtgt"]
 [ext_resource type="Texture2D" uid="uid://rekapqxvhcog" path="res://Tileset2.png" id="2_hsxm8"]
 [ext_resource type="PackedScene" uid="uid://b8s02xe7r4yyl" path="res://player.tscn" id="2_o8yrl"]
-[ext_resource type="Script" path="res://Globals.cs" id="4_w4ijb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p8o5a"]
 texture = ExtResource("2_hsxm8")
@@ -100,6 +99,3 @@ layer_0/tile_data = PackedInt32Array(786433, 65536, 1, 786434, 131072, 1, 786435
 
 [node name="LogicHandler" type="Node2D" parent="."]
 script = ExtResource("1_4jtgt")
-
-[node name="Globals" type="Node" parent="."]
-script = ExtResource("4_w4ijb")
