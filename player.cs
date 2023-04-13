@@ -105,7 +105,7 @@ public partial class player : CharacterBody2D
         else if (isSprinting) {
             motion.X = motion.X * sprintSpeed;
         }
-    }
+    }// End HandleHorizontalGroundMovement()
 
     private void HandleJumping()
     {
@@ -161,7 +161,7 @@ public partial class player : CharacterBody2D
                 motion.Y += (gravity * (float)delta) * 2;
             }
         }// End if (isJumping)
-    }
+    }// End HandleJumping()
 
     private void HandleHorizontalAirMovement()
     {
@@ -244,7 +244,7 @@ public partial class player : CharacterBody2D
                 }
             }
         }
-    }
+    }// End HandleHorizontalAirMovement()
 
     private void HandleAnimations()
     {
@@ -294,6 +294,6 @@ public partial class player : CharacterBody2D
             // Playing idle animation
             animatedSprite2D.Animation = "idle";
         }
-    }
+    }// End HandleAnimations()
 
-}
+}// End player class
