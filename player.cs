@@ -54,7 +54,7 @@ public partial class player : CharacterBody2D
             HandleHorizontalAirMovement();
         }
 
-        HandleJumping();
+        HandleJumping(delta);
 
         // Setting built-in Velocity to motion
         Velocity = motion;
@@ -104,7 +104,7 @@ public partial class player : CharacterBody2D
         }
     }// End HandleHorizontalGroundMovement()
 
-    private void HandleJumping()
+    private void HandleJumping(double delta)
     {
         // Ceiling for motion.Y * JumpForce
         int jumpCeil = -1050;
