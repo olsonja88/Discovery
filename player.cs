@@ -157,6 +157,11 @@ public partial class player : CharacterBody2D
         }
     }
 
+    private void HandleJumping()
+    {
+
+    }
+
     private void HandleHorizontalAirMovement()
     {
         // Horizontal speed in air
