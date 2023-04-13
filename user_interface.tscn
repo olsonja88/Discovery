@@ -1,6 +1,8 @@
-[gd_scene format=3 uid="uid://d06x4kmdm5cps"]
+[gd_scene load_steps=2 format=3 uid="uid://cmheyps11sjvq"]
 
-[node name="UserInterface" type="Control"]
+[ext_resource type="Script" path="res://stopwatch.cs" id="1_157vl"]
+
+[node name="UI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -9,9 +11,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Stopwatch" type="Label" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+script = ExtResource("1_157vl")
 
 [node name="Score" type="Label" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
