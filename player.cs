@@ -32,11 +32,18 @@ public partial class player : CharacterBody2D
         isJumping = false;
     }
 
-    //On startup
+    // On startup
     public override void _Ready()
     {
         jumpCD = false;
         faceLeft = false;
+    }
+
+    // Handling all general processes
+    public override void _Process(double delta)
+    {
+        // Animate Sprite
+        HandleAnimations();
     }
 
 
@@ -58,9 +65,6 @@ public partial class player : CharacterBody2D
 
         // Setting built-in Velocity to motion
         Velocity = motion;
-
-        // Animate Sprite
-        HandleAnimations();
 
         // Moving the player (using built-in Velocity)
         MoveAndSlide();
