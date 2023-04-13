@@ -20,24 +20,10 @@ public partial class logic : Node2D
 
     public override void _Process(double Delta)
     {
-        // Checking player position
-        CheckPlayerPos();
-        // If player died
-        if (playerDied)
-        {
-            HandleDeath();
-        }
     }
 
     private void CheckPlayerPos()
     {
-        // Get Players Y position
-        var playerPosY = GetNode<Node2D>("Player").Position.Y;
-        // Checking if player is out of screen size bounds
-        if (playerPosY > screenSize.Y)
-        {
-            playerDied = true;
-        }
     }
 
     private void HandleDeath()
