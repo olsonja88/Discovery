@@ -10,11 +10,3 @@
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 
 [node name="TestLevel" parent="." instance=ExtResource("2_nqj1q")]
-
-[node name="Stopwatch" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Score" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
