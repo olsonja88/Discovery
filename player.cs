@@ -56,8 +56,8 @@ public partial class player : CharacterBody2D
         {
             HandleHorizontalAirMovement();
         }
- 
-        
+
+        HandleJumping();
 
         // Setting built-in Velocity to motion
         Velocity = motion;
