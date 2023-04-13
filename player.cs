@@ -43,9 +43,6 @@ public partial class player : CharacterBody2D
     // Handling movement and physics
     public override void _PhysicsProcess(double delta)
     {
-        // Ceiling for motion.Y * JumpForce
-        int jumpCeil = -1050;
-
         // Rotation is always 0 degrees
         Rotation = 0;
 
@@ -109,6 +106,9 @@ public partial class player : CharacterBody2D
 
     private void HandleJumping()
     {
+        // Ceiling for motion.Y * JumpForce
+        int jumpCeil = -1050;
+
         // If not jumping currently
         if (!isJumping)
         {
