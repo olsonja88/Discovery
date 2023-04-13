@@ -32,20 +32,24 @@ public partial class player : CharacterBody2D
         isJumping = false;
     }
 
-    //On startup
+    // On startup
     public override void _Ready()
     {
         jumpCD = false;
         faceLeft = false;
     }
 
+    // Handling all general processes
+    public override void _Process(double delta)
+    {
+        // Animate Sprite
+        HandleAnimations();
+    }
+
 
     // Handling movement and physics
     public override void _PhysicsProcess(double delta)
     {
-        // Ceiling for motion.Y * JumpForce
-        int jumpCeil = -1050;
-
         // Rotation is always 0 degrees
         Rotation = 0;
 
@@ -56,7 +60,59 @@ public partial class player : CharacterBody2D
         {
             HandleHorizontalAirMovement();
         }
- 
+
+        HandleJumping(delta);
+
+        // Setting built-in Velocity to motion
+        Velocity = motion;
+
+        // Moving the player (using built-in Velocity)
+        MoveAndSlide();
+
+    } // End _PhysicsProcess()
+
+    private void HandleHorizontalGroundMovement()
+    {
+        bool isWalking = false;
+        bool isSprinting = false;
+
+        // Init motion to zero
+        motion = Vector2.Zero;
+
+        // Take input and change ground motion accordingly
+        if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
+        {
+            isWalking = true;
+        }
+        if (Input.IsActionPressed("sprint")) // If sprinting
+        {
+            isSprinting = true;
+            isWalking = false;
+        }
+        
+        if (Input.IsActionPressed("walk_left"))
+        {
+            motion.X -= 1;
+        }
+        else if (Input.IsActionPressed("walk_right"))
+        {
+            motion.X += 1;
+        }
+        
+        if (isWalking)
+        {
+            motion.X = motion.X * walkSpeed;
+        }
+        else if (isSprinting) {
+            motion.X = motion.X * sprintSpeed;
+        }
+    }// End HandleHorizontalGroundMovement()
+
+    private void HandleJumping(double delta)
+    {
+        // Ceiling for motion.Y * JumpForce
+        int jumpCeil = -1050;
+
         // If not jumping currently
         if (!isJumping)
         {
@@ -64,7 +120,8 @@ public partial class player : CharacterBody2D
             if (Input.IsActionJustReleased("jump"))
             {
                 jumpCD = false;
-            } else if (Input.IsActionPressed("jump") && IsOnFloor() && !jumpCD)
+            }
+            else if (Input.IsActionPressed("jump") && IsOnFloor() && !jumpCD)
             {
                 // Jumping
                 isJumping = true;
@@ -108,54 +165,7 @@ public partial class player : CharacterBody2D
                 motion.Y += (gravity * (float)delta) * 2;
             }
         }// End if (isJumping)
-
-        // Setting built-in Velocity to motion
-        Velocity = motion;
-
-        // Animate Sprite
-        HandleAnimations();
-
-        // Moving the player (using built-in Velocity)
-        MoveAndSlide();
-
-    } // End _PhysicsProcess()
-
-    private void HandleHorizontalGroundMovement()
-    {
-        bool isWalking = false;
-        bool isSprinting = false;
-
-        // Init motion to zero
-        motion = Vector2.Zero;
-
-        // Take input and change ground motion accordingly
-        if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
-        {
-            isWalking = true;
-        }
-        if (Input.IsActionPressed("sprint")) // If sprinting
-        {
-            isSprinting = true;
-            isWalking = false;
-        }
-        
-        if (Input.IsActionPressed("walk_left"))
-        {
-            motion.X -= 1;
-        }
-        else if (Input.IsActionPressed("walk_right"))
-        {
-            motion.X += 1;
-        }
-        
-        if (isWalking)
-        {
-            motion.X = motion.X * walkSpeed;
-        }
-        else if (isSprinting) {
-            motion.X = motion.X * sprintSpeed;
-        }
-    }
+    }// End HandleJumping()
 
     private void HandleHorizontalAirMovement()
     {
@@ -238,7 +248,7 @@ public partial class player : CharacterBody2D
                 }
             }
         }
-    }
+    }// End HandleHorizontalAirMovement()
 
     private void HandleAnimations()
     {
@@ -288,6 +298,6 @@ public partial class player : CharacterBody2D
             // Playing idle animation
             animatedSprite2D.Animation = "idle";
         }
-    }
+    }// End HandleAnimations()
 
-}
+}// End player class
