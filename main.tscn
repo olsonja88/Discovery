@@ -1,19 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://iy6whrh0uuto"]
 
+[ext_resource type="PackedScene" uid="uid://dkrpiceh5e8fy" path="res://player_camera.tscn" id="2_dmujf"]
 [ext_resource type="PackedScene" uid="uid://dt4ix6304luv3" path="res://test_level.tscn" id="2_nqj1q"]
 [ext_resource type="PackedScene" uid="uid://b8s02xe7r4yyl" path="res://player.tscn" id="2_o8yrl"]
-[ext_resource type="PackedScene" uid="uid://cmheyps11sjvq" path="res://user_interface.tscn" id="3_yoju2"]
 
 [node name="Main" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("2_o8yrl")]
 
-[node name="PlayerCamera" type="Camera2D" parent="Player"]
-
-[node name="UserInterface" parent="Player/PlayerCamera" instance=ExtResource("3_yoju2")]
-offset_left = -214.0
-offset_top = -661.0
-offset_right = -214.0
-offset_bottom = -661.0
+[node name="PlayerCamera" parent="Player" instance=ExtResource("2_dmujf")]
 
 [node name="TestLevel" parent="." instance=ExtResource("2_nqj1q")]
