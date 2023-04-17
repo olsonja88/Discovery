@@ -19,5 +19,6 @@ public partial class stopwatch : Label
         float milliseconds = (timeElapsed % 1) * 100;
 
         string timeString = (int)minutes + ":" + (int)seconds + ":" + (int)milliseconds;
+        Text = timeString;
     }
 }
