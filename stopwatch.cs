@@ -4,9 +4,13 @@ using System;
 public partial class stopwatch : Label
 {
     private float timeElapsed = 0.0f;
-    private string timeString;
 
     public override void _Process(double delta)
+    {
+        UpdateStopwatch(delta);
+    }
+
+    private void UpdateStopwatch(double delta)
     {
         timeElapsed += (float)delta;
 
@@ -14,7 +18,6 @@ public partial class stopwatch : Label
         float seconds = timeElapsed % 60;
         float milliseconds = (timeElapsed % 1) * 100;
 
-        timeString = (int)minutes + ":" + (int)seconds + ":" + (int)milliseconds;
-        // GD.Print(timeString);
+        string timeString = (int)minutes + ":" + (int)seconds + ":" + (int)milliseconds;
     }
 }
