@@ -10,6 +10,10 @@
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 
-[node name="TestLevel" parent="." instance=ExtResource("2_nqj1q")]
+[node name="UserInterface" parent="Player/PlayerCamera" instance=ExtResource("3_yoju2")]
+offset_left = -214.0
+offset_top = -661.0
+offset_right = -214.0
+offset_bottom = -661.0
 
-[node name="UserInterface" parent="." instance=ExtResource("3_yoju2")]
+[node name="TestLevel" parent="." instance=ExtResource("2_nqj1q")]
