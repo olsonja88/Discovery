@@ -5,6 +5,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_wpthk"]
 font = ExtResource("1_dp3m7")
+font_size = 100
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -16,8 +17,10 @@ grow_vertical = 2
 
 [node name="Stopwatch" type="Label" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 19.0
+offset_top = 898.0
+offset_right = 411.0
+offset_bottom = 1028.0
 label_settings = SubResource("LabelSettings_wpthk")
 script = ExtResource("1_157vl")
 
