@@ -32,6 +32,11 @@ public partial class player : CharacterBody2D
         isJumping = false;
     }
 
+    public void OnFallBoundAreaEntered()
+    {
+
+    }
+
     // On startup
     public override void _Ready()
     {
