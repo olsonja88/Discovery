@@ -25,6 +25,8 @@ public partial class player : CharacterBody2D
     private bool jumpCD;
     // bool for facing left
     private bool faceLeft;
+    // bool for being alive
+    private bool isAlive;
 
     // When jump timer runs out
     public void OnJumpTimerTimeout()
@@ -32,9 +34,10 @@ public partial class player : CharacterBody2D
         isJumping = false;
     }
 
-    public void OnFallBoundAreaEntered()
+    public void OnFallBoundAreaShapeEntered()
     {
-
+        isAlive = false;
+        GD.Print("Player is dead.");
     }
 
     // On startup

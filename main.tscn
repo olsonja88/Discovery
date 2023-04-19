@@ -13,6 +13,7 @@ size = Vector2(1280, 64)
 script = ExtResource("1_nxs20")
 
 [node name="Player" parent="." instance=ExtResource("2_o8yrl")]
+collision_layer = 257
 
 [node name="PlayerCamera" parent="Player" instance=ExtResource("2_dmujf")]
 
@@ -22,8 +23,10 @@ script = ExtResource("1_nxs20")
 
 [node name="FallBound" type="Area2D" parent="TestLevel"]
 position = Vector2(3392, 1696)
+collision_layer = 0
+collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TestLevel/FallBound"]
 shape = SubResource("RectangleShape2D_sdnyx")
 
-[connection signal="area_entered" from="TestLevel/FallBound" to="Player" method="OnFallBoundAreaEntered"]
+[connection signal="area_shape_entered" from="TestLevel/FallBound" to="." method="OnFallBoundAreaShapeEntered"]
