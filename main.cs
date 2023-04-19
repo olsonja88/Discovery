@@ -4,7 +4,7 @@ using System;
 public partial class main : Node
 {
     private int _score;
-    
+
     public override void _Ready()
     {
 

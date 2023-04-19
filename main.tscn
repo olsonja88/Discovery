@@ -1,13 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://iy6whrh0uuto"]
+[gd_scene load_steps=6 format=3 uid="uid://iy6whrh0uuto"]
 
 [ext_resource type="Script" path="res://main.cs" id="1_nxs20"]
 [ext_resource type="PackedScene" uid="uid://dkrpiceh5e8fy" path="res://player_camera.tscn" id="2_dmujf"]
 [ext_resource type="PackedScene" uid="uid://dt4ix6304luv3" path="res://test_level.tscn" id="2_nqj1q"]
 [ext_resource type="PackedScene" uid="uid://b8s02xe7r4yyl" path="res://player.tscn" id="2_o8yrl"]
 [ext_resource type="PackedScene" uid="uid://cmheyps11sjvq" path="res://user_interface.tscn" id="3_yoju2"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sdnyx"]
-size = Vector2(1280, 64)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_nxs20")
@@ -20,13 +17,3 @@ collision_layer = 257
 [node name="UI" parent="." instance=ExtResource("3_yoju2")]
 
 [node name="TestLevel" parent="." instance=ExtResource("2_nqj1q")]
-
-[node name="FallBound" type="Area2D" parent="TestLevel"]
-position = Vector2(3392, 1696)
-collision_layer = 0
-collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestLevel/FallBound"]
-shape = SubResource("RectangleShape2D_sdnyx")
-
-[connection signal="area_shape_entered" from="TestLevel/FallBound" to="." method="OnFallBoundAreaShapeEntered"]

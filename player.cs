@@ -34,12 +34,6 @@ public partial class player : CharacterBody2D
         isJumping = false;
     }
 
-    public void OnFallBoundAreaShapeEntered()
-    {
-        isAlive = false;
-        GD.Print("Player is dead.");
-    }
-
     // On startup
     public override void _Ready()
     {
