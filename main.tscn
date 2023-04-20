@@ -10,7 +10,6 @@
 script = ExtResource("1_nxs20")
 
 [node name="Player" parent="." instance=ExtResource("2_o8yrl")]
-collision_layer = 257
 
 [node name="PlayerCamera" parent="Player" instance=ExtResource("2_dmujf")]
 
