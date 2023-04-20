@@ -10,29 +10,41 @@ public partial class main : Node
 
     }
 
+    public void OnTestLevelFallBoundDeath()
+    {
+        GD.Print("Fall Bound Death!");
+        HandleDeath();
+    }
+
     public void HandleDeath()
     {
-
+        GD.Print("Handling Death!");
+        GameOver();
     }
 
     public void RespawnPlayer()
     {
+        GD.Print("Respawning Player!");
         var player = GetNode<CharacterBody2D>("Player");
         var startPos = GetNode<Marker2D>("TestLevel/StartPos");
         player.Position = startPos.Position;
-
+        player.Show();
     }
 
     public void GameOver()
     {
+        GD.Print("Game Over!");
         var player = GetNode<CharacterBody2D>("Player");
         player.Hide();
+        NewGame();
     }
 
     public void NewGame()
     {
-        var sw = GetNode<Label>("/UI/Stopwatch");
+        GD.Print("New Game!");
+        var sw = GetNode<Label>("UI/Stopwatch");
         sw.Text = "0";
         score = 0;
+        RespawnPlayer();
     }
 }

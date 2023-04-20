@@ -3,10 +3,12 @@ using System;
 
 public partial class test_level : Node2D
 {
+    [Signal]
+    public delegate void FallBoundDeathEventHandler();
+
     public void OnFallBoundEntered(Area2D area)
     {
         GD.Print("Fall Bound Entered!");
-        var player = GetNode<CharacterBody2D>("../Player");
-        player.Hide();
+        EmitSignal(SignalName.FallBoundDeath);
     }
 }
