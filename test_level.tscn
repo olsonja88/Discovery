@@ -135,5 +135,5 @@ position = Vector2(4064, 576)
 shape = SubResource("RectangleShape2D_fulnv")
 debug_color = Color(0.968627, 0, 0.462745, 0.419608)
 
-[connection signal="area_entered" from="FallBounds/FallBound1" to="." method="OnArea2DEntered"]
-[connection signal="area_entered" from="FallBounds/FallBound2" to="." method="OnArea2DEntered"]
+[connection signal="area_entered" from="FallBounds/FallBound1" to="." method="OnFallBoundEntered"]
+[connection signal="area_entered" from="FallBounds/FallBound2" to="." method="OnFallBoundEntered"]
