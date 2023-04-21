@@ -5,46 +5,52 @@ public partial class main : Node
 {
     public int score;
 
+    [Signal]
+    public delegate void StopWatchEventHandler();
+    [Signal]
+    public delegate void UpdateScoreEventHandler(int score);
+
     public override void _Ready()
     {
-
+        score = 0;
+        EmitSignal(SignalName.UpdateScore, score);
     }
 
-    public void OnTestLevelFallBoundDeath()
+    private void OnTestLevelFallBoundDeath()
     {
-        GD.Print("Fall Bound Death!");
+        // GD.Print("Fall Bound Death!");
         HandleDeath();
     }
 
-    public void HandleDeath()
+    private void HandleDeath()
     {
-        GD.Print("Handling Death!");
+        // GD.Print("Handling Death!");
         GameOver();
     }
 
-    public void RespawnPlayer()
+    private void RespawnPlayer()
     {
-        GD.Print("Respawning Player!");
+        // GD.Print("Respawning Player!");
         var player = GetNode<CharacterBody2D>("Player");
         var startPos = GetNode<Marker2D>("TestLevel/StartPos");
         player.Position = startPos.Position;
         player.Show();
     }
 
-    public void GameOver()
+    private void GameOver()
     {
-        GD.Print("Game Over!");
+        // GD.Print("Game Over!");
         var player = GetNode<CharacterBody2D>("Player");
         player.Hide();
         NewGame();
     }
 
-    public void NewGame()
+    private void NewGame()
     {
-        GD.Print("New Game!");
-        var sw = GetNode<Label>("UI/Stopwatch");
-        sw.Text = "0";
+        // GD.Print("New Game!");
         score = 0;
+        EmitSignal(SignalName.StopWatch);
+        EmitSignal(SignalName.UpdateScore, score);
         RespawnPlayer();
     }
 }
