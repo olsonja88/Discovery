@@ -6,14 +6,15 @@ public partial class main : Node
     public int score;
 
     [Signal]
-    public delegate void ResetStopWatchEventHandler();
+    public delegate void ResetStopwatchEventHandler();
     [Signal]
     public delegate void UpdateScoreEventHandler(int score);
-
+    
     public override void _Ready()
     {
         score = 0;
         EmitSignal(SignalName.UpdateScore, score);
+        // StartGame() function when ready
     }
 
     private void OnTestLevelFallBoundDeath()
@@ -42,15 +43,22 @@ public partial class main : Node
         // GD.Print("Game Over!");
         var player = GetNode<CharacterBody2D>("Player");
         player.Hide();
+        player.QueueFree();
         NewGame();
     }
 
     private void NewGame()
     {
         // GD.Print("New Game!");
+        // Still missing countdown before respawn
         score = 0;
-        EmitSignal(SignalName.ResetStopWatch);
+        EmitSignal(SignalName.ResetStopwatch);
         EmitSignal(SignalName.UpdateScore, score);
         RespawnPlayer();
+    }
+
+    private void StartGame()
+    {
+        // Show start screen, call new game when start button is pressed
     }
 }
