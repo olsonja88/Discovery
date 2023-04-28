@@ -10,7 +10,7 @@ public partial class ui : CanvasLayer
         UpdateStopwatch(delta);
     }
     
-    private void OnMainStopWatch()
+    private void OnMainResetStopWatch()
     {
         // GD.Print("Main StopWatch signal received!");
         ResetStopwatch();

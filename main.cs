@@ -6,7 +6,7 @@ public partial class main : Node
     public int score;
 
     [Signal]
-    public delegate void StopWatchEventHandler();
+    public delegate void ResetStopWatchEventHandler();
     [Signal]
     public delegate void UpdateScoreEventHandler(int score);
 
@@ -49,7 +49,7 @@ public partial class main : Node
     {
         // GD.Print("New Game!");
         score = 0;
-        EmitSignal(SignalName.StopWatch);
+        EmitSignal(SignalName.ResetStopWatch);
         EmitSignal(SignalName.UpdateScore, score);
         RespawnPlayer();
     }
