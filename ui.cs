@@ -42,4 +42,16 @@ public partial class ui : CanvasLayer
         sw.Text = timeString;
     }
 
+    private void ShowMessage(string text)
+    {
+        var message = GetNode<Label>("Message");
+        message.Text = text;
+        message.Show();
+    }
+
+    private void ShowGameOver()
+    {
+        ShowMessage("Game Over");
+    }
+
 }
