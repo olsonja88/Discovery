@@ -3,22 +3,14 @@ using System;
 
 public partial class ui : CanvasLayer
 {
-    [Signal]
-    public delegate void StartGameButtonEventHandler();
-
     public float timeElapsed = 0.0f;
 
     public override void _Process(double delta)
     {
         UpdateStopwatch(delta);
     }
-
-    private void OnStartButtonPressed()
-    {
-
-    }
     
-    private void OnMainResetStopwatch()
+    private void OnMainResetStopWatch()
     {
         // GD.Print("Main StopWatch signal received!");
         ResetStopwatch();
@@ -60,12 +52,6 @@ public partial class ui : CanvasLayer
     private void ShowGameOver()
     {
         ShowMessage("Game Over");
-    }
-
-    private void ShowStart()
-    {
-        // Show message for whatever level
-        ShowMessage("Test Level");
     }
 
 }
