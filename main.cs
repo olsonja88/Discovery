@@ -12,14 +12,25 @@ public partial class main : Node
 
     public override void _Ready()
     {
-        score = 0;
-        EmitSignal(SignalName.UpdateScore, score);
+        GetTree().Paused = true; // Pause Main and all children on Ready
+        score = 0; // Set score
+        EmitSignal(SignalName.UpdateScore, score); // Update score in UI
     }
 
     private void OnTestLevelFallBoundDeath()
     {
         // GD.Print("Fall Bound Death!");
         HandleDeath();
+    }
+
+    private void OnUIStartGame()
+    {
+        GetTree().Paused = false;
+        var sb = GetNode<Button>("UI/StartButton");
+        var gm = GetNode<Label>("UI/Message");
+        sb.Hide();
+        gm.Hide();
+        GD.Print("UI Start Game Signal Received!");
     }
 
     private void HandleDeath()

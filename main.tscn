@@ -17,6 +17,6 @@ script = ExtResource("1_nxs20")
 
 [node name="TestLevel" parent="." instance=ExtResource("2_nqj1q")]
 
-[connection signal="StopWatch" from="." to="UI" method="OnMainStopWatch"]
 [connection signal="UpdateScore" from="." to="UI" method="OnMainUpdateScore"]
+[connection signal="StartGame" from="UI" to="." method="OnUIStartGame"]
 [connection signal="FallBoundDeath" from="TestLevel" to="." method="OnTestLevelFallBoundDeath"]

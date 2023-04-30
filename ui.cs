@@ -3,6 +3,9 @@ using System;
 
 public partial class ui : CanvasLayer
 {
+    [Signal]
+    public delegate void StartGameEventHandler();
+
     public float timeElapsed = 0.0f;
 
     public override void _Process(double delta)
@@ -21,6 +24,13 @@ public partial class ui : CanvasLayer
         var sl = GetNode<Label>("Score");
         string scoreString = score.ToString();
         sl.Text = scoreString;
+    }
+
+    private void OnStartButtonPressed()
+    {
+        GD.Print("Start Button pressed!");
+        // Emitting custom StartGame signal when StartButton pressed
+        EmitSignal(SignalName.StartGame);
     }
 
     private void ResetStopwatch()
