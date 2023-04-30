@@ -15,6 +15,7 @@ public partial class main : Node
         GetTree().Paused = true; // Pause Main and all children
         score = 0; // Set score
         EmitSignal(SignalName.UpdateScore, score); // Update score in UI
+        // Hide the player
         var player = GetNode<CharacterBody2D>("Player");
         player.Hide();
     }
@@ -35,6 +36,7 @@ public partial class main : Node
         var gm = GetNode<Label>("UI/Message");
         sb.Hide();
         gm.Hide();
+        // Show player
         var player = GetNode<CharacterBody2D>("Player");
         player.Show();
         GD.Print("UI Start Game Signal Received!");

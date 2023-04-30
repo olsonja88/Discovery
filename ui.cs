@@ -8,6 +8,10 @@ public partial class ui : CanvasLayer
 
     public float timeElapsed = 0.0f;
 
+    public override void _Ready()
+    {
+    }
+
     public override void _Process(double delta)
     {
         UpdateStopwatch(delta);
