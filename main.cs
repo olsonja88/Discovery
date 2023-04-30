@@ -20,6 +20,15 @@ public partial class main : Node
         player.Hide();
     }
 
+    private void OnSpawnTimerTimeout()
+    {
+        // Unpause game
+        GetTree().Paused = false;
+        // Show player
+        var player = GetNode<CharacterBody2D>("Player");
+        player.Show();
+    }
+
     private void OnTestLevelFallBoundDeath()
     {
         // GD.Print("Fall Bound Death!");
@@ -29,17 +38,15 @@ public partial class main : Node
     // Once Start Button is pressed
     private void OnUIStartGame()
     {
-        // Unpause game
-        GetTree().Paused = false;
+        GD.Print("UI Start Game Signal Received!");
         // Hide Game Message and Start Button
         var sb = GetNode<Button>("UI/StartButton");
         var gm = GetNode<Label>("UI/Message");
         sb.Hide();
         gm.Hide();
-        // Show player
-        var player = GetNode<CharacterBody2D>("Player");
-        player.Show();
-        GD.Print("UI Start Game Signal Received!");
+        // Start Spawn in timer
+        var st = GetNode<Timer>("SpawnTimer");
+        st.Start();
     }
 
     private void HandleDeath()

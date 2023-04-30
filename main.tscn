@@ -17,6 +17,12 @@ script = ExtResource("1_nxs20")
 
 [node name="TestLevel" parent="." instance=ExtResource("2_nqj1q")]
 
+[node name="SpawnTimer" type="Timer" parent="."]
+process_mode = 2
+wait_time = 2.0
+one_shot = true
+
 [connection signal="UpdateScore" from="." to="UI" method="OnMainUpdateScore"]
 [connection signal="StartGame" from="UI" to="." method="OnUIStartGame"]
 [connection signal="FallBoundDeath" from="TestLevel" to="." method="OnTestLevelFallBoundDeath"]
+[connection signal="timeout" from="SpawnTimer" to="." method="OnSpawnTimerTimeout"]
