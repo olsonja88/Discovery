@@ -12,9 +12,11 @@ public partial class main : Node
 
     public override void _Ready()
     {
-        GetTree().Paused = true; // Pause Main and all children on Ready
+        GetTree().Paused = true; // Pause Main and all children
         score = 0; // Set score
         EmitSignal(SignalName.UpdateScore, score); // Update score in UI
+        var player = GetNode<CharacterBody2D>("Player");
+        player.Hide();
     }
 
     private void OnTestLevelFallBoundDeath()
@@ -23,13 +25,18 @@ public partial class main : Node
         HandleDeath();
     }
 
+    // Once Start Button is pressed
     private void OnUIStartGame()
     {
+        // Unpause game
         GetTree().Paused = false;
+        // Hide Game Message and Start Button
         var sb = GetNode<Button>("UI/StartButton");
         var gm = GetNode<Label>("UI/Message");
         sb.Hide();
         gm.Hide();
+        var player = GetNode<CharacterBody2D>("Player");
+        player.Show();
         GD.Print("UI Start Game Signal Received!");
     }
 
