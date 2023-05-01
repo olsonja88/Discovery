@@ -22,6 +22,7 @@ process_mode = 2
 wait_time = 2.0
 one_shot = true
 
+[connection signal="ResetStopWatch" from="." to="UI" method="OnMainResetStopWatch"]
 [connection signal="UpdateScore" from="." to="UI" method="OnMainUpdateScore"]
 [connection signal="StartGame" from="UI" to="." method="OnUIStartGame"]
 [connection signal="FallBoundDeath" from="TestLevel" to="." method="OnTestLevelFallBoundDeath"]

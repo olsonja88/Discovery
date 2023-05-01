@@ -31,7 +31,7 @@ public partial class main : Node
 
     private void OnTestLevelFallBoundDeath()
     {
-        // GD.Print("Fall Bound Death!");
+        GD.Print("Fall Bound Death!");
         HandleDeath();
     }
 
@@ -51,13 +51,13 @@ public partial class main : Node
 
     private void HandleDeath()
     {
-        // GD.Print("Handling Death!");
+        GD.Print("Handling Death!");
         GameOver();
     }
 
     private void RespawnPlayer()
     {
-        // GD.Print("Respawning Player!");
+        GD.Print("Respawning Player!");
         var player = GetNode<CharacterBody2D>("Player");
         var startPos = GetNode<Marker2D>("TestLevel/StartPos");
         player.Position = startPos.Position;
@@ -66,7 +66,7 @@ public partial class main : Node
 
     private void GameOver()
     {
-        // GD.Print("Game Over!");
+        GD.Print("Game Over!");
         var player = GetNode<CharacterBody2D>("Player");
         player.Hide();
         NewGame();
@@ -74,7 +74,7 @@ public partial class main : Node
 
     private void NewGame()
     {
-        // GD.Print("New Game!");
+        GD.Print("New Game!");
         score = 0;
         EmitSignal(SignalName.ResetStopWatch);
         EmitSignal(SignalName.UpdateScore, score);

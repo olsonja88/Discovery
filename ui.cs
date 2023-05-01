@@ -39,7 +39,7 @@ public partial class ui : CanvasLayer
 
     private void ResetStopwatch()
     {
-        // GD.Print("Resetting stopwatch!");
+        GD.Print("Resetting stopwatch!");
         timeElapsed = 0.0f;
     }
 
