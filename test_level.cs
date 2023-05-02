@@ -14,7 +14,7 @@ public partial class test_level : Node2D
 
     public void OnFallBoundEntered(Area2D area)
     {
-        // GD.Print("Fall Bound Entered!");
+        GD.Print("Fall Bound Entered!");
         EmitSignal(SignalName.FallBoundDeath);
     }
 }

@@ -39,14 +39,8 @@ public partial class main : Node
     private void OnUIStartGame()
     {
         GD.Print("UI Start Game Signal Received!");
-        // Hide Game Message and Start Button
-        var sb = GetNode<Button>("UI/StartButton");
-        var gm = GetNode<Label>("UI/Message");
-        sb.Hide();
-        gm.Hide();
-        // Start Spawn in timer
-        var st = GetNode<Timer>("SpawnTimer");
-        st.Start();
+        NewGame();
+        
     }
 
     private void HandleDeath()
@@ -61,15 +55,25 @@ public partial class main : Node
         var player = GetNode<CharacterBody2D>("Player");
         var startPos = GetNode<Marker2D>("TestLevel/StartPos");
         player.Position = startPos.Position;
-        player.Show();
+        // player.Show();
     }
 
     private void GameOver()
     {
         GD.Print("Game Over!");
+        GetTree().Paused = true; // Pause Main and all children
+        // Show Game Message and Start Button
+        var sb = GetNode<Button>("UI/StartButton");
+        var gm = GetNode<Label>("UI/Message");
+        sb.Text = "Retry";
+        gm.Text = "Game Over!";
+        sb.Show();
+        gm.Show();
+        // Hide player
         var player = GetNode<CharacterBody2D>("Player");
         player.Hide();
-        NewGame();
+        // Start a New Game
+        // NewGame();
     }
 
     private void NewGame()
@@ -78,6 +82,14 @@ public partial class main : Node
         score = 0;
         EmitSignal(SignalName.ResetStopWatch);
         EmitSignal(SignalName.UpdateScore, score);
+        // Hide Game Message and Start Button
+        var sb = GetNode<Button>("UI/StartButton");
+        var gm = GetNode<Label>("UI/Message");
+        sb.Hide();
+        gm.Hide();
+        // Start Spawn in timer
+        var st = GetNode<Timer>("SpawnTimer");
+        st.Start();
         RespawnPlayer();
     }
 }
