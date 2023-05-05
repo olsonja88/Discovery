@@ -30,6 +30,13 @@ public partial class ui : CanvasLayer
         sl.Text = scoreString;
     }
 
+    private void OnMainUpdateLives(int lives)
+    {
+        var pl = GetNode<Label>("Lives");
+        string livesString = lives.ToString();
+        pl.Text = "Lives: " + livesString;
+    }
+
     private void OnStartButtonPressed()
     {
         GD.Print("Start Button pressed!");

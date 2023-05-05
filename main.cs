@@ -10,6 +10,8 @@ public partial class main : Node
     public delegate void ResetStopWatchEventHandler();
     [Signal]
     public delegate void UpdateScoreEventHandler(int score);
+    [Signal]
+    public delegate void UpdateLivesEventHandler(int playerLives);
 
     public override void _Ready()
     {
@@ -50,10 +52,11 @@ public partial class main : Node
         var player = GetNode<CharacterBody2D>("Player");
         player.Hide();
         GetTree().Paused = true; // Pause Main and all children
-        if (playerLives >= 0)
+        if (playerLives > 0)
         {     
-            GD.Print("Player lives >= ZERO!");
+            GD.Print("Player lives > ZERO!");
             playerLives -= 1;
+            EmitSignal(SignalName.UpdateLives, playerLives);
             // Start Spawn in timer
             var st = GetNode<Timer>("SpawnTimer");
             st.Start();
@@ -66,7 +69,7 @@ public partial class main : Node
 
     private void RespawnPlayer()
     {
-        GD.Print("Respawning Player!");
+        GD.Print("Respawning Player!");        
         var player = GetNode<CharacterBody2D>("Player");
         var startPos = GetNode<Marker2D>("TestLevel/StartPos");
         player.Position = startPos.Position;
@@ -91,6 +94,7 @@ public partial class main : Node
         score = 0;
         EmitSignal(SignalName.ResetStopWatch);
         EmitSignal(SignalName.UpdateScore, score);
+        EmitSignal(SignalName.UpdateLives, playerLives);
         // Hide Game Message and Start Button
         var sb = GetNode<Button>("UI/StartButton");
         var gm = GetNode<Label>("UI/Message");
