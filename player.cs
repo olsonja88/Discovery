@@ -25,6 +25,8 @@ public partial class player : CharacterBody2D
     private bool jumpCD;
     // bool for facing left
     private bool faceLeft;
+    // bool for being alive
+    private bool isAlive;
 
     // When jump timer runs out
     public void OnJumpTimerTimeout()
@@ -260,11 +262,11 @@ public partial class player : CharacterBody2D
         animatedSprite2D.SpeedScale = 1;
 
         // Checking which direction player is facing
-        if (Input.IsKeyPressed(Key.A))
+        if (Input.IsKeyPressed(Key.A) || Input.IsKeyPressed(Key.Left))
         {
             faceLeft = true;
         }
-        else if (Input.IsKeyPressed(Key.D))
+        else if (Input.IsKeyPressed(Key.D) || Input.IsKeyPressed(Key.Right))
         {
             faceLeft = false;
         }

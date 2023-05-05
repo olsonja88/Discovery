@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://iy6whrh0uuto"]
+[gd_scene load_steps=6 format=3 uid="uid://iy6whrh0uuto"]
 
+[ext_resource type="Script" path="res://main.cs" id="1_nxs20"]
 [ext_resource type="PackedScene" uid="uid://dkrpiceh5e8fy" path="res://player_camera.tscn" id="2_dmujf"]
 [ext_resource type="PackedScene" uid="uid://dt4ix6304luv3" path="res://test_level.tscn" id="2_nqj1q"]
 [ext_resource type="PackedScene" uid="uid://b8s02xe7r4yyl" path="res://player.tscn" id="2_o8yrl"]
 [ext_resource type="PackedScene" uid="uid://cmheyps11sjvq" path="res://user_interface.tscn" id="3_yoju2"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_nxs20")
 
 [node name="Player" parent="." instance=ExtResource("2_o8yrl")]
 
@@ -14,3 +16,15 @@
 [node name="UI" parent="." instance=ExtResource("3_yoju2")]
 
 [node name="TestLevel" parent="." instance=ExtResource("2_nqj1q")]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 2.0
+one_shot = true
+
+[connection signal="ResetStopWatch" from="." to="UI" method="OnMainResetStopWatch"]
+[connection signal="UpdateLives" from="." to="UI" method="OnMainUpdateLives"]
+[connection signal="UpdateScore" from="." to="UI" method="OnMainUpdateScore"]
+[connection signal="StartGame" from="UI" to="." method="OnUIStartGame"]
+[connection signal="FallBoundDeath" from="TestLevel" to="." method="OnTestLevelFallBoundDeath"]
+[connection signal="timeout" from="SpawnTimer" to="." method="OnSpawnTimerTimeout"]
