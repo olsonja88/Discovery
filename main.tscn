@@ -18,7 +18,7 @@ script = ExtResource("1_nxs20")
 [node name="TestLevel" parent="." instance=ExtResource("2_nqj1q")]
 
 [node name="SpawnTimer" type="Timer" parent="."]
-process_mode = 2
+process_mode = 3
 wait_time = 2.0
 one_shot = true
 
