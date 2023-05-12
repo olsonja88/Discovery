@@ -263,14 +263,7 @@ public partial class player : CharacterBody2D
         {
             // Playing sprint animation
             animatedSprite2D.Animation = "sprint";
-        }
-        else if (Input.IsActionPressed("walk_left") || (Input.IsActionPressed("walk_right")))
-        {
-            // Slowing the animation speed
-            animatedSprite2D.SpeedScale = 0.8F;
-            // Playing sprint animation
-            animatedSprite2D.Animation = "sprint";
-        }
+        }        
         else
         {
             // Playing idle animation
