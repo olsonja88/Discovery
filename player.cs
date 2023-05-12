@@ -53,13 +53,7 @@ public partial class player : CharacterBody2D
         // Rotation is always 0 degrees
         Rotation = 0;
 
-        if (IsOnFloor())
-        {
-            HandleHorizontalGroundMovement();
-        } else if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right"))
-        {
-            HandleHorizontalAirMovement();
-        }
+        HandleHorizontalMovement();
 
         HandleJumping(delta);
 
@@ -71,10 +65,10 @@ public partial class player : CharacterBody2D
 
     } // End _PhysicsProcess()
 
-    private void HandleHorizontalGroundMovement()
+    private void HandleHorizontalMovement()
     {       
         // Init motion to zero
-        motion = Vector2.Zero;
+        motion.X = 0;
 
         if (Input.IsActionPressed("move_left"))
         {
@@ -143,87 +137,7 @@ public partial class player : CharacterBody2D
                 motion.Y += (gravity * (float)delta) * 2;
             }
         }// End if (isJumping)
-    }// End HandleJumping()
-
-    private void HandleHorizontalAirMovement()
-    {
-        // If not moving
-        if (motion.X == 0)
-        {
-            // And the player hits "walk left"
-            if (Input.IsActionPressed("walk_left"))
-            {
-                motion.X = 0;
-                // Move left at half speed
-                motion.X -= airWalkSpeed;
-            }
-            else if (Input.IsActionPressed("sprint"))
-            {
-                if (Input.IsKeyPressed(Key.A))
-                {
-                    motion.X = 0;
-                    // Move left at half speed
-                    motion.X -= airWalkSpeed;
-                }
-            }
-
-            if (Input.IsActionPressed("walk_right"))
-            {
-                motion.X = 0;
-                // Move right at half speed
-                motion.X += airWalkSpeed;
-            }
-            else if (Input.IsActionPressed("sprint"))
-            {
-                if (Input.IsKeyPressed(Key.D))
-                {
-                    motion.X = 0;
-                    // Move left at half speed
-                    motion.X += airWalkSpeed;
-                }
-            }
-        }
-
-        // If moving right
-        if (motion.X > 0)
-        {
-            // And the player hits "walk left"
-            if (Input.IsActionPressed("walk_left"))
-            {
-                motion.X = 0;
-                // Move left at half speed
-                motion.X -= airWalkSpeed;
-            }
-            else if (Input.IsActionPressed("sprint"))
-            {
-                if (Input.IsKeyPressed(Key.A))
-                {
-                    motion.X = 0;
-                    // Move left at half speed
-                    motion.X -= airWalkSpeed;
-                }
-            }
-        }
-        // If moving left
-        else if (motion.X < 0)
-        {   // And the player hits "walk right"
-            if (Input.IsActionPressed("walk_right"))
-            {
-                motion.X = 0;
-                // Move right at half speed
-                motion.X += airWalkSpeed;
-            }
-            else if (Input.IsActionPressed("sprint"))
-            {
-                if (Input.IsKeyPressed(Key.D))
-                {
-                    motion.X = 0;
-                    // Move left at half speed
-                    motion.X += airWalkSpeed;
-                }
-            }
-        }
-    }// End HandleHorizontalAirMovement()
+    }// End HandleJumping()    
 
     private void HandleAnimations()
     {
