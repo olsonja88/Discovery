@@ -5,9 +5,7 @@ using System.IO.IsolatedStorage;
 public partial class player : CharacterBody2D
 {
     // Movement variables, can be set in the Inspector
-    // Movement speed
-    [Export]
-    public int walkSpeed = 400;
+    // Movement speed    
     [Export]
     public int sprintSpeed = 700;
     // Force of jump
@@ -74,10 +72,7 @@ public partial class player : CharacterBody2D
     } // End _PhysicsProcess()
 
     private void HandleHorizontalGroundMovement()
-    {
-        bool isWalking = false;
-        bool isSprinting = false;
-
+    {       
         // Init motion to zero
         motion = Vector2.Zero;
 
