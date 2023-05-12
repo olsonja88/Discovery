@@ -147,9 +147,6 @@ public partial class player : CharacterBody2D
 
     private void HandleHorizontalAirMovement()
     {
-        // Horizontal speed in air
-        int airWalkSpeed = 200;
-
         // If not moving
         if (motion.X == 0)
         {
