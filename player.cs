@@ -255,11 +255,11 @@ public partial class player : CharacterBody2D
         {
             animatedSprite2D.Animation = "jump";
         }
-        else if(!IsOnFloor() && motion.Y > 0)
+        else if (!IsOnFloor() && motion.Y > 0)
         {
             animatedSprite2D.Animation = "fall";
         }
-        else if (Input.IsActionPressed("sprint") && motion.X != 0)
+        else if (Input.IsActionPressed("move_left") || Input.IsActionPressed("move_right"))
         {
             // Playing sprint animation
             animatedSprite2D.Animation = "sprint";
