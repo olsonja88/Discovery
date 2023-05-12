@@ -5,11 +5,9 @@ using System.IO.IsolatedStorage;
 public partial class player : CharacterBody2D
 {
     // Movement variables, can be set in the Inspector
-    // Movement speed
+    // Movement speed    
     [Export]
-    public int walkSpeed = 400;
-    [Export]
-    public int sprintSpeed = 700;
+    public int moveSpeed = 700;
     // Force of jump
     [Export]
     public int jumpForce = 1500;
@@ -74,40 +72,18 @@ public partial class player : CharacterBody2D
     } // End _PhysicsProcess()
 
     private void HandleHorizontalGroundMovement()
-    {
-        bool isWalking = false;
-        bool isSprinting = false;
-
+    {       
         // Init motion to zero
         motion = Vector2.Zero;
 
-        // Take input and change ground motion accordingly
-        if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
+        if (Input.IsActionPressed("move_left"))
         {
-            isWalking = true;
+            motion.X -= moveSpeed;
         }
-        if (Input.IsActionPressed("sprint")) // If sprinting
+        if (Input.IsActionPressed("move_right"))
         {
-            isSprinting = true;
-            isWalking = false;
-        }
-        
-        if (Input.IsActionPressed("walk_left"))
-        {
-            motion.X -= 1;
-        }
-        else if (Input.IsActionPressed("walk_right"))
-        {
-            motion.X += 1;
-        }
-        
-        if (isWalking)
-        {
-            motion.X = motion.X * walkSpeed;
-        }
-        else if (isSprinting) {
-            motion.X = motion.X * sprintSpeed;
-        }
+            motion.X += moveSpeed;
+        }        
     }// End HandleHorizontalGroundMovement()
 
     private void HandleJumping(double delta)
@@ -279,22 +255,15 @@ public partial class player : CharacterBody2D
         {
             animatedSprite2D.Animation = "jump";
         }
-        else if(!IsOnFloor() && motion.Y > 0)
+        else if (!IsOnFloor() && motion.Y > 0)
         {
             animatedSprite2D.Animation = "fall";
         }
-        else if (Input.IsActionPressed("sprint") && motion.X != 0)
+        else if (Input.IsActionPressed("move_left") || Input.IsActionPressed("move_right"))
         {
             // Playing sprint animation
             animatedSprite2D.Animation = "sprint";
-        }
-        else if (Input.IsActionPressed("walk_left") || (Input.IsActionPressed("walk_right")))
-        {
-            // Slowing the animation speed
-            animatedSprite2D.SpeedScale = 0.8F;
-            // Playing sprint animation
-            animatedSprite2D.Animation = "sprint";
-        }
+        }        
         else
         {
             // Playing idle animation
