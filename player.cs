@@ -7,7 +7,7 @@ public partial class player : CharacterBody2D
     // Movement variables, can be set in the Inspector
     // Movement speed    
     [Export]
-    public int sprintSpeed = 700;
+    public int moveSpeed = 700;
     // Force of jump
     [Export]
     public int jumpForce = 1500;
@@ -75,6 +75,8 @@ public partial class player : CharacterBody2D
     {       
         // Init motion to zero
         motion = Vector2.Zero;
+
+        
 
         // Take input and change ground motion accordingly
         if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
