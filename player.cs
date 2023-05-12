@@ -85,6 +85,11 @@ public partial class player : CharacterBody2D
         // Ceiling for motion.Y * JumpForce
         int jumpCeil = -1050;
 
+        if (IsOnFloor())
+        {
+            motion.Y = 0;
+        }
+
         // If not jumping currently
         if (!isJumping)
         {
