@@ -76,35 +76,14 @@ public partial class player : CharacterBody2D
         // Init motion to zero
         motion = Vector2.Zero;
 
-        
-
-        // Take input and change ground motion accordingly
-        if (Input.IsActionPressed("walk_left") || Input.IsActionPressed("walk_right")) // If walking
+        if (Input.IsActionPressed("move_left"))
         {
-            isWalking = true;
+            motion.X -= moveSpeed;
         }
-        if (Input.IsActionPressed("sprint")) // If sprinting
+        if (Input.IsActionPressed("move_right"))
         {
-            isSprinting = true;
-            isWalking = false;
-        }
-        
-        if (Input.IsActionPressed("walk_left"))
-        {
-            motion.X -= 1;
-        }
-        else if (Input.IsActionPressed("walk_right"))
-        {
-            motion.X += 1;
-        }
-        
-        if (isWalking)
-        {
-            motion.X = motion.X * walkSpeed;
-        }
-        else if (isSprinting) {
-            motion.X = motion.X * sprintSpeed;
-        }
+            motion.X += moveSpeed;
+        }        
     }// End HandleHorizontalGroundMovement()
 
     private void HandleJumping(double delta)
