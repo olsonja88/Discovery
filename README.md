@@ -16,3 +16,9 @@ Game Dev Project
 * Movement mechanics and enemies based on Mega Man X.
 * The player can equip 3 monsters to bring into each level.
 - Each monster equipped grants the player a specific ability.
+
+
+## Current State and Features (5/25/23)
+- Basic movement system is implemented.
+- Start, die, respawn, and game over are functional.
+- See "issues" for what's coming next!
