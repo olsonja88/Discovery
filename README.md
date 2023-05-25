@@ -19,6 +19,8 @@ Game Dev Project
 
 
 ## Current State and Features (5/25/23)
-- Basic movement system is implemented.
-- Start, die, respawn, and game over are functional.
-- See "issues" for what's coming next!
+- Basic movement system w/ animations.
+- Start, die, respawn, and game over.
+- Simple tileset for level building.
+
+#### See "issues" for what's coming next!
