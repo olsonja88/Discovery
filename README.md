@@ -3,11 +3,12 @@ Game Dev Project
 
 ## How to Run
 1. Install Godot 4.0 .NET version from Godot website.
-2. Clone this repo into a findable directory.
+2. Clone this repo into an empty directory.
 3. Follow Godot's setup instruction.
-4. Open the new repository directory in Godot.
-5. Click "build" in the upper right.
-6. Click the play button in the upper right.
+4. Once Godot is setup, open it and click "import" on the right side.
+5. Enter the path to the cloned repo and click "import and edit".
+6. Once the project is open, click "build" in the upper right.
+7. Then, click the play button in the upper right to play the current build.
 
 
 ## Game Concept & Design
